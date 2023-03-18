@@ -1,16 +1,29 @@
-# This is a sample Python script.
+def menu():
+    print("Программа - Заметки")
+    print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить")
+    comand = int(input())
+    return comand
+def add_notes(notes):
+    with open('data.txt', 'w', encoding='utf_8') as file:
+        file.write(notes)
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    return notes
+
+def input_notes():
+    id_n = input()
+    head_n = input()
+    body_n = input()
+    date_n = input()
+    notes = id_n + ';' + head_n + ';' + body_n  + ';' + date_n
+    return notes
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def view():
+    print(input_notes())
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    menu()
+    add_notes(input_notes())
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+

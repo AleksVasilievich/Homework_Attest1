@@ -1,5 +1,5 @@
 
-
+read_notes =''
 def menu():
     print("Программа - Заметки")
     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
@@ -7,7 +7,7 @@ def menu():
 
     if comand == '1':
         input_notes(), menu()
-    elif comand == '2':
+    elif comand == '2' and read_notes != '':
         save_notes(read_notes)
     elif comand == '3':
         save_notes(input_notes())

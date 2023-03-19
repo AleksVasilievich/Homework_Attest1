@@ -8,7 +8,7 @@ def menu():
     if comand == '1':
         input_notes(), menu()
     elif comand == '2':
-        save_notes(red_nones)
+        save_notes(read_notes)
     elif comand == '3':
         save_notes(input_notes())
     elif comand == '4':
@@ -41,8 +41,9 @@ def input_notes():
     body_n = input()
     date_n = input()
     notes = (id_n + ';' + head_n + ';' + body_n  + ';' + date_n + '\n')
-    red_nones = notes
-    return notes,  print(red_nones),
+    global read_notes
+    read_notes = notes
+    return notes,  print(read_notes)
 
 
 def error_notes():

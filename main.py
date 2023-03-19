@@ -1,12 +1,14 @@
+
+
 def menu():
     print("Программа - Заметки")
     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
     comand = input()
 
     if comand == '1':
-        create_notes(input_notes())
+        input_notes(), menu()
     elif comand == '2':
-        save_notes(input_notes())
+        save_notes(red_nones)
     elif comand == '3':
         save_notes(input_notes())
     elif comand == '4':
@@ -20,12 +22,14 @@ def menu():
 
     return comand
 def create_notes(notes):
-    with open('data.txt', 'w', encoding='utf_8') as file:
+    with open('data.csv', 'w', encoding='utf_8') as file:
         file.write(notes)
 
-    return notes,  print(notes), menu()
+    print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
+
+    return notes
 def save_notes(notes):
-    with open('data.txt', 'a', encoding='utf_8') as file:
+    with open('data.txt1', 'a', encoding='utf_8') as file:
         file.write(notes)
 
     return notes
@@ -37,7 +41,8 @@ def input_notes():
     body_n = input()
     date_n = input()
     notes = (id_n + ';' + head_n + ';' + body_n  + ';' + date_n + '\n')
-    return notes
+    red_nones = notes
+    return notes,  print(red_nones),
 
 
 def error_notes():

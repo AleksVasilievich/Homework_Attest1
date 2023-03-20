@@ -1,5 +1,6 @@
+read_notes = ''
 
-read_notes =''
+
 def menu():
     print("Программа - Заметки")
     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
@@ -10,9 +11,9 @@ def menu():
     elif comand == '2' and read_notes != '':
         save_notes(read_notes)
     elif comand == '3':
-        save_notes(input_notes())
+        read_notes()
     elif comand == '4':
-        save_notes(input_notes())
+        edit_notes()
     elif comand == '5':
         save_notes(input_notes())
     elif comand == '6':
@@ -21,6 +22,8 @@ def menu():
         error_notes()
 
     return comand
+
+
 def create_notes(notes):
     with open('data.csv', 'w', encoding='utf_8') as file:
         file.write(notes)
@@ -28,26 +31,45 @@ def create_notes(notes):
     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
 
     return notes
+
+
 def save_notes(notes):
     with open('data.txt1', 'a', encoding='utf_8') as file:
         file.write(notes)
 
     return notes
 
+def read_notes():
+    with open('data.txt1', 'r', encoding='utf_8') as file:
+        return print(file.read())
+
+def edit_notes():
+    temp_id = input('Enter id note ->  ')
+    array = []
+    with open('data.txt1', 'r', encoding='utf_8') as file:
+        # notes = ''.join(file.read())
+        array.append(file.read().split())
+
+        # for temp_id in array[0][range(len(array))]:
+
+
+
+        return print(array[0][0]), print(array)
 
 def input_notes():
     id_n = input()
     head_n = input()
     body_n = input()
     date_n = input()
-    notes = (id_n + ';' + head_n + ';' + body_n  + ';' + date_n + '\n')
+    notes = (id_n + ';' + head_n + ';' + body_n + ';' + date_n + '\n')
     global read_notes
     read_notes = notes
-    return notes,  print(read_notes)
+    return notes, print(read_notes)
 
 
 def error_notes():
     return print('No Comand !')
+
 
 def exit_notes():
     return print('Goodbye')
@@ -61,5 +83,3 @@ def view():
 if __name__ == '__main__':
     menu()
     # add_notes(input_notes())
-
-

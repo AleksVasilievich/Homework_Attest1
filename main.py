@@ -1,5 +1,8 @@
-read_notes = ''
+import csv
 
+import pandas as pd
+import fileinput
+read_notes = ''
 
 def menu():
     print("Программа - Заметки")
@@ -18,13 +21,16 @@ def menu():
         save_notes(input_notes())
     elif comand == '6':
         exit_notes()
+    elif comand == '7':
+        input()
     else:
         error_notes()
 
     return comand
 
-
 def create_notes(notes):
+    print(notes)
+
     with open('data.csv', 'w', encoding='utf_8') as file:
         file.write(notes)
 
@@ -34,27 +40,42 @@ def create_notes(notes):
 
 
 def save_notes(notes):
-    with open('data.txt1', 'a', encoding='utf_8') as file:
+    with open('data.csv', 'a', encoding='utf_8') as file:
         file.write(notes)
 
     return notes
 
 def read_notes():
-    with open('data.txt1', 'r', encoding='utf_8') as file:
+    with open('data.csv', 'r', encoding='utf_8') as file:
         return print(file.read())
 
 def edit_notes():
-    temp_id = input('Enter id note ->  ')
-    array = []
-    with open('data.txt1', 'r', encoding='utf_8') as file:
-        # notes = ''.join(file.read())
+    temp_id = int(input('Enter id note ->  '))
+    array = list()
+    array1 = list()
+    with open('data.csv', 'r', encoding='utf_8') as file:
         array.append(file.read().split())
+        for i in array:
+            for j in i:
+                array1.append(j.split(';'))
 
-        # for temp_id in array[0][range(len(array))]:
+    temp_array = temp_id - 1
+    return print(array1[temp_array])
+# def edit_notes():
+#     df = pd.read_csv('data.csv')
+#     df.loc[1, 'name'] = 'New text'
+#     df.to_csv('data.csv')
 
-
-
-        return print(array[0][0]), print(array)
+# def edit_notes():
+#     for file in fileinput.input():
+#         print(file)
+#     # with open('data.txt', 'w', encoding='utf_8') as file:
+#     #     file_reader = csv.reader(file)
+#     with open('data1.csv', newline='', encoding='utf_8') as file:
+#         file_reader = csv.reader(file)
+#         for i in file_reader:
+#             print(', '.join(i))
+#             break
 
 def input_notes():
     id_n = input()
@@ -66,14 +87,11 @@ def input_notes():
     read_notes = notes
     return notes, print(read_notes)
 
-
 def error_notes():
     return print('No Comand !')
 
-
 def exit_notes():
     return print('Goodbye')
-
 
 def view():
     print()

@@ -13,8 +13,8 @@ def menu():
         input_notes(), menu()
     elif comand == '2' and read_notes != '':
         save_notes(read_notes)
-    elif comand == '3':
-        read_notes()
+    elif comand == '3' and read_notes != '':
+        read_notes(), menu()
     elif comand == '4':
         edit_notes()
     elif comand == '5':
@@ -46,9 +46,23 @@ def save_notes(notes):
     return notes, print('Ваши данные успешно сохранены !!!')
 
 def read_notes():
-    with open('data.csv', 'r', encoding='utf_8') as file:
-        return print(file.read())
-
+    menu_id = int(input('Весь список нажмите - 1 ; Заметка по номеру нажмите - 2  '))
+    if menu_id == 1:
+        with open('data.csv', 'r', encoding='utf_8') as file:
+            return print(file.read())
+    elif menu_id == 2:
+        temp_id = int(input('Введите номер ID ->   '))
+        array = list()
+        array1 = list()
+        with open('data.csv', 'r', encoding='utf_8') as file:
+            array.append(file.read().split())
+            for i in array:
+                for j in i:
+                    array1.append(j.split(';'))
+        temp_array = temp_id - 1
+        return print(array1[temp_array])
+    else:
+        error_notes()
 def edit_notes():
     temp_id = int(input('Enter id note ->  '))
     array = list()
@@ -88,10 +102,10 @@ def input_notes():
     return notes, print(read_notes), print('СОХРАНИТЬ ДАННЫЕ ???-- НАЖМИТЕ --  2 -- ИЛИ ДАННЫЕ БУДУТ ПОТЕРЯНЫ !!!')
 
 def error_notes():
-    return print('No Comand !')
+    return print('No Comand !'), menu()
 
 def exit_notes():
-    return print('Goodbye')
+    return print('Goodbye !')
 
 def view():
     print()

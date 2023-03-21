@@ -9,26 +9,24 @@ def menu():
     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
     comand = input()
 
-    try:
-        if comand == '1':
-            input_notes(), menu()
-        elif comand == '2' and read_notes != '':
-            save_notes(read_notes)
-        elif comand == '3' and read_notes != '':
-            read_notes(), menu()
-        elif comand == '4':
-            edit_notes()
-        elif comand == '5':
-            save_notes(input_notes())
-        elif comand == '6':
-            exit_notes()
-        elif comand == '7':
-            input()
-        else:
-            error_notes()
-        return comand
-    except Exception:
+    if comand == '1':
+        input_notes(), menu()
+    elif comand == '2' and read_notes != '':
+        save_notes(read_notes)
+    elif comand == '3' and read_notes != '':
+        read_notes(), menu()
+    elif comand == '4':
+        edit_notes()
+    elif comand == '5':
+        save_notes(input_notes())
+    elif comand == '6':
+        exit_notes()
+    elif comand == '7':
+        input()
+    else:
         error_notes()
+    return comand
+
 
 def create_notes(notes):
     print(notes)
@@ -41,12 +39,15 @@ def create_notes(notes):
     return notes
 
 def save_notes(notes):
-    with open('data.csv', 'a', encoding='utf_8') as file:
-        file.write(notes)
-        print('Ваши данные успешно сохранены !!!')
+    try:
+        with open('data.csv', 'a', encoding='utf_8') as file:
+            file.write(notes)
+            print('Ваши данные успешно сохранены !!!')
+    except Exception:
+        print("Создайте чтобы сохранить !!!"), menu()
 
 def read_notes():
-    menu_id = input('Весь список нажмите - 1 ; Заметка по номеру нажмите - 2  ')
+    menu_id = input('Весь список нажмите - 1 ; Заметка по id нажмите - 2  ')
     if menu_id == '1':
         with open('data.csv', 'r', encoding='utf_8') as file:
             return print(file.read())
@@ -64,6 +65,8 @@ def read_notes():
             print(array1[temp_array])
         except Exception:
             error_notes()
+    else:
+        read_notes()
 def edit_notes():
     temp_id = int(input('Enter id note ->  '))
     array = list()

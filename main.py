@@ -1,5 +1,5 @@
 import csv
-
+import uuid
 import pandas as pd
 import fileinput
 read_notes = ''
@@ -78,7 +78,7 @@ def edit_notes():
                 array1.append(j.split(';'))
 
     temp_array = temp_id - 1
-    return print(*array1[temp_array]), print('Эти данные будут изменены !!! Введите новые данные : ')
+    return print(*array1[temp_array]), print('Эти данные будут изменены !!! Введите новые данные : '), array1
 # def edit_notes():
 #     df = pd.read_csv('data.csv')
 #     df.loc[1, 'name'] = 'New text'
@@ -96,7 +96,29 @@ def edit_notes():
 #             break
 
 def input_notes():
+    array2 = list()
+    array = list()
+    array1 = list()
+    with open('data.csv', 'r', encoding='utf_8') as file:
+        array.append(file.read().split())
+        for i in array:
+            for j in i:
+                array1.append(j.split(';'))
+    # edit_notes()
+    for i in array1:
+        for j in i:
+            array2.append(j)
+    array2 = array2[::4]
+    print('Список id заметок: ')
+    print(array2)
+    print('Введите новый id ')
+
     id_n = input()
+    for i in array2:
+        while i == id_n:
+            print('id уже существует !!!')
+            id_n = input()
+
     head_n = input()
     body_n = input()
     date_n = input()

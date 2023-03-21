@@ -43,7 +43,7 @@ def save_notes(notes):
     with open('data.csv', 'a', encoding='utf_8') as file:
         file.write(notes)
 
-    return notes
+    return notes, print('Ваши данные успешно сохранены !!!')
 
 def read_notes():
     with open('data.csv', 'r', encoding='utf_8') as file:
@@ -60,7 +60,7 @@ def edit_notes():
                 array1.append(j.split(';'))
 
     temp_array = temp_id - 1
-    return print(array1[temp_array])
+    return print(*array1[temp_array]), print('Эти данные будут изменены !!! Введите новые данные : ')
 # def edit_notes():
 #     df = pd.read_csv('data.csv')
 #     df.loc[1, 'name'] = 'New text'
@@ -85,7 +85,7 @@ def input_notes():
     notes = (id_n + ';' + head_n + ';' + body_n + ';' + date_n + '\n')
     global read_notes
     read_notes = notes
-    return notes, print(read_notes)
+    return notes, print(read_notes), print('СОХРАНИТЬ ДАННЫЕ ???-- НАЖМИТЕ --  2 -- ИЛИ ДАННЫЕ БУДУТ ПОТЕРЯНЫ !!!')
 
 def error_notes():
     return print('No Comand !')

@@ -15,27 +15,27 @@ def menu():
         save_notes(read_notes)
     elif comand == '3' and read_notes != '':
         read_notes(), menu()
-    elif comand == '4':
-        read_id_notes()
+    # elif comand == '4':
+    #     read_id_notes()
     elif comand == '5':
         edit_notes()
-    elif comand == '6':
-        dell_notes()
+    # elif comand == '6':
+    #     dell_notes()
     elif comand == '7':
         exit_notes()
     else:
         error_notes()
     return comand
 
-def create_notes(notes):
-    print(notes)
-
-    with open('data.csv', 'w', encoding='utf_8') as file:
-        file.write(notes)
-
-    print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
-
-    return notes
+# def create_notes(notes):
+#     print(notes)
+#
+#     with open('data.csv', 'w', encoding='utf_8') as file:
+#         file.write(notes)
+#
+#     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
+#
+#     return notes
 
 def save_notes(notes):
     try:
@@ -91,22 +91,7 @@ def edit_notes():
         error_notes()
 
 def input_notes():
-    array2 = list()
-    array = list()
-    array1 = list()
-    with open('data.csv', 'r', encoding='utf_8') as file:
-        array.append(file.read().split())
-        for i in array:
-            for j in i:
-                array1.append(j.split(';'))
-    # edit_notes()
-    for i in array1:
-        for j in i:
-            array2.append(j)
-    array2 = array2[::4]
-    print('Список id заметок: ')
-    print(array2)
-    # print('Введите новый id ')
+    array2 = view_id()
 
     id_n = input('Введите новый id ->  ')
     for i in array2:

@@ -13,10 +13,10 @@ def menu():
         input_notes(), menu()
     elif comand == '2' and read_notes != '':
         save_notes(read_notes)
-    elif comand == '3' and read_notes != '':
-        read_notes(), menu()
-    # elif comand == '4':
-    #     read_id_notes()
+    elif comand == '3':
+        read_notes()
+    elif comand == '4' and read_notes != '':
+        read_id_notes(), menu()
     elif comand == '5':
         edit_notes()
     # elif comand == '6':
@@ -45,34 +45,30 @@ def save_notes(notes):
     except Exception:
         print("Создайте чтобы сохранить !!!"), menu()
 
-# def read_id_nots():
-#     with open('data.csv', 'r', encoding='utf_8') as file:
-#         return print(file.read())
-#
 def read_notes():
-    menu_id = input('Весь список нажмите - 1 ; Заметка по id нажмите - 2  ')
-    if menu_id == '1':
+    try:
         with open('data.csv', 'r', encoding='utf_8') as file:
             return print(file.read())
-    elif menu_id == '2':
-        temp = input('Введите номер ID ->   ')
-        try:
-            arr = view_id()
-            temp_id = arr.index(temp)
-            array = list()
-            array1 = list()
-            with open('data.csv', 'r', encoding='utf_8') as file:
-                array.append(file.read().split())
-                for i in array:
-                    for j in i:
-                        array1.append(j.split(';'))
-            temp_array = int(temp_id)
+    except Exception:
+        error_notes()
+#
+def read_id_notes():
+    temp = input('Введите номер ID ->   ')
+    try:
+        arr = view_id()
+        temp_id = arr.index(temp)
+        array = list()
+        array1 = list()
+        with open('data.csv', 'r', encoding='utf_8') as file:
+            array.append(file.read().split())
+            for i in array:
+                for j in i:
+                    array1.append(j.split(';'))
+        temp_array = int(temp_id)
             # print(array1)
-            print(array1[temp_array])
-        except Exception:
-                        error_notes()
-    else:
-        read_notes()
+        print(array1[temp_array])
+    except Exception:
+                    error_notes()
 
 def edit_notes():
     try:

@@ -119,7 +119,6 @@ def delete_notes():
     array1 = array.clear()
     print(array1)
 
-
 def view_id():
     a = ''
     array = list()

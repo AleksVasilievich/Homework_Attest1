@@ -10,25 +10,28 @@ def menu():
     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - читать по ID; 5 - редоктировать ; 6 - удалить ; 7 - выход")
     comand = input()
 
-    if comand == '1':
-        input_notes(), menu()
-    elif comand == '2' and read_notes != '':
-        save_notes(read_notes)
-    elif comand == '3':
-        read_notes()
-    elif comand == '4' and read_notes != '':
-        read_id_notes(), menu()
-    elif comand == '5':
-        edit_notes()
-    elif comand == '6':
-        delete_notes()
-    elif comand == '7':
-        exit_notes()
-    elif comand == '8':
-        view_id()
-    else:
+    try:
+        if comand == '1':
+            input_notes(), menu()
+        elif comand == '2' and read_notes != '':
+            save_notes(read_notes)
+        elif comand == '3':
+            read_notes()
+        elif comand == '4' and read_notes != '':
+            read_id_notes(), menu()
+        elif comand == '5':
+            edit_notes()
+        elif comand == '6':
+            delete_notes()
+        elif comand == '7':
+            exit_notes()
+        elif comand == '8':
+            view_id()
+        else:
+            error_notes()
+        return comand
+    except Exception:
         error_notes()
-    return comand
 
 # def create_notes(notes):
 #     print(notes)
@@ -44,7 +47,7 @@ def save_notes(notes):
     try:
         with open('data.csv', 'a', encoding='utf_8') as file:
             file.write(notes)
-            print('Ваши данные успешно сохранены !!!')
+            print('Ваши данные успешно сохранены !!!'),
     except Exception:
         print("Создайте чтобы сохранить !!!"), menu()
 
@@ -54,6 +57,27 @@ def read_notes():
             return print(file.read())
     except Exception:
         error_notes()
+
+# def read_id_notes():
+#     try:
+#         temp = input('Введите номер ID ->   ')
+#         arr = view_id()
+#         temp_id = arr.index(temp)
+#         array = list()
+#         array1 = list()
+#         with open('data.csv', 'r', encoding='utf_8') as file:
+#             array.append(file.read().split())
+#             for i in array:
+#                 for j in i:
+#                     array1.append(j.split(';'))
+#         temp_array = int(temp_id)
+#         print(array1)
+#         print(*array1[temp_array])
+#         # array1[temp_array].clear()
+#         # print(array1)
+#         return array1[temp_array]
+#     except Exception:
+#                     error_notes()
 
 def read_id_notes():
     try:
@@ -68,8 +92,8 @@ def read_id_notes():
                 for j in i:
                     array1.append(j.split(';'))
         temp_array = int(temp_id)
-            # print(array1)
-        print(array1[temp_array])
+        print(array1)
+        print(*array1[temp_array])
         # array1[temp_array].clear()
         # print(array1)
         return array1[temp_array]
@@ -98,21 +122,23 @@ def owerwriting():
     pass
 def input_notes():
     array2 = view_id()
+    try:
 
-    id_n = input('Введите новый id ->  ')
-    for i in array2:
-        while i == id_n:
-            print('id уже существует !!!')
-            id_n = input('Введите новый id ->  ')
-
-    head_n = input('Введите заголовок ->  ')
-    body_n = input('Введите текст заметки ->  ')
-    date_n = input('Введите дату ->  ')
-    notes = (id_n + ';' + head_n + ';' + body_n + ';' + date_n + '\n')
-    global read_notes
-    read_notes = notes
-    return notes, print(read_notes), print('СОХРАНИТЬ ДАННЫЕ ???-- НАЖМИТЕ --  2 -- ИЛИ ДАННЫЕ БУДУТ ПОТЕРЯНЫ !!!')
-
+        id_int = abs(int(input('Введите натуральное число, новый id ->  ')))
+        for i in array2:
+            while i == str(id_int):
+                print('id уже существует !!!')
+                id_int = abs(int(input('Введите натуральное число, новый id ->  ')))
+        id_str = str(id_int)
+        head_n = input('Введите заголовок ->  ')
+        body_n = input('Введите текст заметки ->  ')
+        date_n = input('Введите дату ->  ')
+        notes = (id_str + ';' + head_n + ';' + body_n + ';' + date_n + '\n')
+        global read_notes
+        read_notes = notes
+        return notes, print(read_notes), print('СОХРАНИТЬ ДАННЫЕ ???-- НАЖМИТЕ --  2 -- ИЛИ ДАННЫЕ БУДУТ ПОТЕРЯНЫ !!!')
+    except Exception:
+        error_notes()
 def error_notes():
     return print('No Comand !')
 
@@ -126,22 +152,39 @@ def delete_notes():
 
 
 def view_id():
-    array2 = list()
+    a = ''
     array = list()
     array1 = list()
     with open('data.csv', 'r', encoding='utf_8') as file:
         array.append(file.read().split())
-        for i in array:
+        for i in array[0]:
             for j in i:
-                array1.append(j.split(';'))
-    for i in array1:
-        for j in i:
-            array2.append(j)
-    # print(array1)
-    array2 = array2[::4]
-    print('Список id заметок: ')
-    print(array2)
-    return array2
+                if j != ';':
+                    a += j
+                elif j == ';':
+                    break
+            array1.append(a)
+            a = ''
+        print(array1)
+        return array1
+
+# def view_id():
+#     array2 = list()
+#     array = list()
+#     array1 = list()
+#     with open('data.csv', 'r', encoding='utf_8') as file:
+#         array.append(file.read().split())
+#         for i in array:
+#             for j in i:
+#                 array1.append(j.split(';'))
+#     for i in array1:
+#         for j in i:
+#             array2.append(j)
+#     print(array1), print(array2), print(array)
+#     array2 = array2[::4]
+#     print('Список id заметок: ')
+#     print(array2)
+#     return array2
 
 
 if __name__ == '__main__':

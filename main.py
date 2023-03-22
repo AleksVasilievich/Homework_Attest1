@@ -33,15 +33,6 @@ def menu():
     except Exception:
         error_notes()
 
-# def create_notes(notes):
-#     print(notes)
-#
-#     with open('data.csv', 'w', encoding='utf_8') as file:
-#         file.write(notes)
-#
-#     print("Введите ___ 1 - создать ; 2 - сохранить ; 3 - читать ; 4 - редоктировать ; 5 - удалить ; 6 - выход")
-#
-#     return notes
 
 def save_notes(notes):
     try:
@@ -58,41 +49,19 @@ def read_notes():
     except Exception:
         error_notes()
 
-# def read_id_notes():
-#     try:
-#         temp = input('Введите номер ID ->   ')
-#         arr = view_id()
-#         temp_id = arr.index(temp)
-#         array = list()
-#         array1 = list()
-#         with open('data.csv', 'r', encoding='utf_8') as file:
-#             array.append(file.read().split())
-#             for i in array:
-#                 for j in i:
-#                     array1.append(j.split(';'))
-#         temp_array = int(temp_id)
-#         print(array1)
-#         print(*array1[temp_array])
-#         # array1[temp_array].clear()
-#         # print(array1)
-#         return array1[temp_array]
-#     except Exception:
-#                     error_notes()
 
 def read_id_notes():
     try:
         temp = input('Введите номер ID ->   ')
         arr = view_id()
         temp_id = arr.index(temp)
+        temp_array = int(temp_id)
         array = list()
         array1 = list()
         with open('data.csv', 'r', encoding='utf_8') as file:
             array.append(file.read().split())
-            for i in array:
-                for j in i:
-                    array1.append(j.split(';'))
-        temp_array = int(temp_id)
-        print(array1)
+            for i in array[0]:
+                array1.append(i)
         print(*array1[temp_array])
         # array1[temp_array].clear()
         # print(array1)
@@ -167,24 +136,6 @@ def view_id():
             a = ''
         print(array1)
         return array1
-
-# def view_id():
-#     array2 = list()
-#     array = list()
-#     array1 = list()
-#     with open('data.csv', 'r', encoding='utf_8') as file:
-#         array.append(file.read().split())
-#         for i in array:
-#             for j in i:
-#                 array1.append(j.split(';'))
-#     for i in array1:
-#         for j in i:
-#             array2.append(j)
-#     print(array1), print(array2), print(array)
-#     array2 = array2[::4]
-#     print('Список id заметок: ')
-#     print(array2)
-#     return array2
 
 
 if __name__ == '__main__':

@@ -102,6 +102,38 @@ def error_notes():
 def exit_notes():
     return print('Goodbye !')
 
+def delete_notes():
+    try:
+
+
+        l_notes = input('Удалить весь список нажмите - 1 , по ID - 2 ->   ')
+        if l_notes == '1':
+            with open('data.csv', 'w', encoding='utf_8') as file:
+                file.write('')
+                print('Ваши данные успешно сохранены !!!'),
+        elif l_notes == '2':
+            view_id()
+            temp = input('Введите номер ID ->   ')
+            arr = view_id()
+            temp_id = arr.index(temp)
+            temp_array = int(temp_id)
+            array = list()
+            array1 = list()
+            with open('data.csv', 'r', encoding='utf_8') as file:
+                array.append(file.read().split())
+                for i in array[0]:
+                    array1.append(i)
+            array = array1[0:temp_array] + array1[(temp_array + 1):]
+            print(array)
+            # return array1[temp_array]
+
+            with open('data1.csv', 'w', encoding='utf_8') as file:
+                for i in array:
+                    file.writelines('%s\n' %i)
+
+    except Exception:
+        error_notes()
+
 # def delete_notes():
 #     try:
 #         l_notes = input('Удалить весь список нажмите - 1 , по ID - 2 ->   ')

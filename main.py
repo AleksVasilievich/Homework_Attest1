@@ -102,36 +102,46 @@ def error_notes():
 def exit_notes():
     return print('Goodbye !')
 
-def delete_notes():
-    try:
-        l_notes = input('Удалить весь список нажмите - 1 , по ID - 2 ->   ')
-        if l_notes == '1':
-            with open('data.csv', 'w', encoding='utf_8') as file:
-                file.write('')
-                print('Ваши данные успешно сохранены !!!'),
-        elif l_notes == '2':
-            view_id()
-            temp = input('Введите номер ID ->   ')
-            read_notes()
-            new_notes = ''
-            array = list()
-            array1 = list()
-            with open('data.csv', 'r', encoding='utf_8') as file:
-                array.append(file.read().split())
-            for i in array:
-                for j in i:
-                    if  j[0] != temp:
-                        array1.append(j)
-                    elif j[0] == temp:
-                        continue
-            # print(array1)
-            for i in array1:
-                new_notes = new_notes + i + '\n'
-            print(new_notes)
-            with open('data.csv', 'w', encoding='utf_8') as file:
-                file.write(new_notes)
-    except Exception:
-        error_notes()
+# def delete_notes():
+#     try:
+#         l_notes = input('Удалить весь список нажмите - 1 , по ID - 2 ->   ')
+#         if l_notes == '1':
+#             with open('data.csv', 'w', encoding='utf_8') as file:
+#                 file.write('')
+#                 print('Ваши данные успешно сохранены !!!'),
+#         elif l_notes == '2':
+#             view_id()
+#             temp = input('Введите номер ID ->   ')
+#             read_notes()
+#             new_notes = ''
+#             array = list()
+#             array1 = list()
+#             with open('data.csv', 'r', encoding='utf_8') as file:
+#                 array.append(file.read().split())
+#             ls = ''
+#             print(array[0])
+#             for i in array[0]:
+#                 print(i[0])
+#                 for j in i:
+#                     # print(j)
+#                     if  j != ';':
+#                         ls = ls + j
+#                     elif j == ';':
+#                         break
+#                 print(ls), print(temp)
+#                 ls = ''
+#                 if ls != temp:
+#                     array1.append(i)
+#                 elif ls == temp:
+#                     continue
+#             print(array1)
+#             # for i in array1:
+#             #     new_notes = new_notes + i + '\n'
+#             # print(new_notes)
+#             # with open('data.csv', 'w', encoding='utf_8') as file:
+#             #     file.write(new_notes)
+#     except Exception:
+#         error_notes()
 
 def view_id():
     a = ''

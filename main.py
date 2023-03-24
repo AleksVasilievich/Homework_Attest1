@@ -6,7 +6,7 @@ from csv import writer
 from datetime import datetime
 import os
 
-read_notes = ''
+# read_notes = ''
 
 def menu():
     print("Программа - Заметки")
@@ -16,11 +16,11 @@ def menu():
     try:
         if comand == '1':
             input_notes(), menu()
-        elif comand == '2' and read_notes != '':
+        elif comand == '2':
             save_notes(read_notes)
         elif comand == '3':
-            read_notes()
-        elif comand == '4' and read_notes != '':
+            reads_notes()
+        elif comand == '4':
             read_id_notes(), menu()
         elif comand == '5':
             edit_notes()
@@ -28,10 +28,11 @@ def menu():
             delete_notes()
         elif comand == '7':
             exit_notes()
-        elif comand == '8':
-            deletes_notes()
+        # elif comand == '8':
+        #     deletes_notes()
         else:
-            error_notes()
+            # error_notes()
+            print("Error")
         return comand
     except Exception:
         error_notes()
@@ -105,14 +106,13 @@ def exit_notes():
 
 def delete_notes():
     try:
-
         l_notes = input('Удалить весь список нажмите - 1 , по ID - 2 ->   ')
         if l_notes == '1':
             with open('data.csv', 'w', encoding='utf_8') as file:
                 file.write('')
                 print('Ваши данные успешно сохранены !!!')
                 global read_notes
-                read_notes = ''
+                # read_notes = ''
         elif l_notes == '2':
             array1 = read_id_notes()[0]
             temp_array = read_id_notes()[1]
@@ -147,4 +147,3 @@ def view_id():
 if __name__ == '__main__':
     menu()
     # add_notes(input_notes())5
-
